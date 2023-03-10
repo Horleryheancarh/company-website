@@ -7,5 +7,6 @@ export const mail = {
   clientId: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+  redirectUrl: process.env.GOOGLE_REDIRECT_URL,
   user: process.env.GOOGLE_USER,
 };

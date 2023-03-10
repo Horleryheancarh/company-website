@@ -3,17 +3,16 @@ import { google } from "googleapis";
 import { mail } from "../config";
 import { IMailArg } from "../types";
 
-const redirectURL = "https://developers.google.com/oauthplayground";
 const OAuth2Client = new google.auth.OAuth2(
   mail.clientId,
   mail.clientSecret,
-  redirectURL
+  mail.redirectUrl
 );
+const accessToken = await OAuth2Client.getAccessToken();
 
 export const sendMail = async ({ to, subject, html }: IMailArg) => {
-  const accessToken = await OAuth2Client.getAccessToken();
-
   try {
+    console.log(accessToken);
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
@@ -22,7 +21,7 @@ export const sendMail = async ({ to, subject, html }: IMailArg) => {
         clientId: mail.clientId,
         clientSecret: mail.clientSecret,
         refreshToken: mail.refreshToken,
-        accessToken: accessToken.token
+        accessToken
       },
     });
 
@@ -37,4 +36,6 @@ export const sendMail = async ({ to, subject, html }: IMailArg) => {
   }
 }
 
-
+export const contact = async ( subject: string, data: object ) => {
+  
+}
